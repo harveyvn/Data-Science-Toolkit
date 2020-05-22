@@ -46,12 +46,12 @@ def multiple_linear_regression(df, independent_names, dependent_name):
 
 	return lm
 
-def visualize_distribution_plot(df, target_value, lms, independent_atts):
+def get_mlr_plot(df, target_value, lms, independent_atts):
 	'''
-	Returns the visualization to determine the effectiveness for the multiple
+	Returns the distribution plot to determine the effectiveness for the multiple
 	linear regression between multiple independent variables and a dependent variable.
 
-	Requirement: 
+	Requirements: 
 		from sklearn.linear_model import LinearRegression
 		import matplotlib as mpl
 		import matplotlib.pyplot as plt
@@ -87,3 +87,28 @@ def visualize_distribution_plot(df, target_value, lms, independent_atts):
 
 	plt.show()
 	plt.close()
+
+def simple_polynomial_regression(df, independent_name, dependent_name, degree):
+	'''
+	Returns the Polynomial Regression poly1d.
+
+	Requirement: 
+		import numpy as np
+
+	Parameters:
+		df (DataFrame): The pandas DataFrame.
+		independent_name (str): An independent variable's name.
+		dependent_name (str): A dependent variable's name.
+
+	Returns:
+		p (poly1d): The fitted Polynomial Regression model.
+			>>> p(x)
+	'''
+
+	X = df[independent_name]
+	Y = df[dependent_name]
+	f = np.polyfit(X, Y, degree)
+	p = np.poly1d(f)
+
+	return p
+
