@@ -103,7 +103,10 @@ def simple_polynomial_regression(df, independent_name, dependent_name, degree):
 
 	Returns:
 		p (poly1d): The fitted Polynomial Regression model.
-			>>> p(x)
+	
+	Usage:
+		p = simple_polynomial_regression(...)
+		p(x)
 	'''
 
 	X = df[independent_name]
@@ -164,6 +167,10 @@ def multiple_polynomia_regression(df, independent_names, dependent_name, degree)
 	
 	Returns:
 		pipe(Pipeline): The trainned Multiple Polynomial Regression model.
+
+	Usage:
+		pipe = multiple_polynomia_regression(...)
+		pipe.predict(x)
 
 
 	'''
