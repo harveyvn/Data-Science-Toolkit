@@ -112,3 +112,35 @@ def simple_polynomial_regression(df, independent_name, dependent_name, degree):
 
 	return p
 
+def get_spr_visualization(df, model, independent_variable, dependent_variabble):
+	'''
+	Returns the visualization of Simple Polynomial Regression.
+
+	Requirement: 
+		import matplotlib as mpl
+		import matplotlib.pyplot as plt
+		%matplotlib inline
+
+	Parameters:
+		df (DataFrame): The pandas DataFrame.
+		model (poly1d): The fitted Polynomial Regression model.
+		independent_name (str): An independent variable's name.
+		dependent_name (str): A dependent variable's name.
+
+	'''
+
+	x = df[independent_variable]
+	y = df[dependent_variabble]
+	x_new = np.linspace(x.min(), x.max(), x.size)
+	y_new = model(x_new)
+
+	mpl.style.use('seaborn')
+	plt.plot(x, y, '.')
+	plt.plot(x_new, y_new, '-')
+	plt.title('Polynomial Fit with Matplotlib for ' 
+	          + dependent_variabble + ' ~ ' + independent_variable)
+	plt.xlabel(independent_variable)
+	plt.ylabel(dependent_variabble)
+
+	plt.show()
+	plt.close()
