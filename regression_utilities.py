@@ -75,8 +75,8 @@ def get_mlr_plot(df, target_value, lms, independent_atts):
 	ax = sns.distplot(df[target_value], hist=False, color="r", label="Actual Value")
 
 	step = 1
-	for (lm, independent_names, color) in zip(lms, independent_atts, colors):
-		label = 'lm with ' + str(len(independent_names)) + ' attributes'
+	for (lm, independent_names) in zip(lms, independent_atts):
+		label = 'Model with ' + str(len(independent_names)) + ' attributes'
 		Yhat = lm.predict(df[independent_names])
 		sns.distplot(Yhat, hist=False, label=label, ax=ax)
 		step = step + 1
@@ -99,6 +99,7 @@ def simple_polynomial_regression(df, independent_name, dependent_name, degree):
 		df (DataFrame): The pandas DataFrame.
 		independent_name (str): An independent variable's name.
 		dependent_name (str): A dependent variable's name.
+		degree (int): An order of polynomial regression.
 
 	Returns:
 		p (poly1d): The fitted Polynomial Regression model.
@@ -144,3 +145,5 @@ def get_spr_visualization(df, model, independent_variable, dependent_variabble):
 
 	plt.show()
 	plt.close()
+
+
