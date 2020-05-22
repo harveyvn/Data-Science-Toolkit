@@ -139,7 +139,7 @@ def get_spr_visualization(df, model, independent_variable, dependent_variabble):
 	plt.plot(x, y, '.')
 	plt.plot(x_new, y_new, '-')
 	plt.title('Polynomial Fit with Matplotlib for ' 
-	          + dependent_variabble + ' ~ ' + independent_variable)
+						+ dependent_variabble + ' ~ ' + independent_variable)
 	plt.xlabel(independent_variable)
 	plt.ylabel(dependent_variabble)
 
@@ -147,3 +147,34 @@ def get_spr_visualization(df, model, independent_variable, dependent_variabble):
 	plt.close()
 
 
+def multiple_polynomia_regression(df, independent_names, dependent_name, degree):
+	'''
+	Returns the Polynomial Regression for more than one attribute
+
+	Requirements: 
+		from sklearn.pipeline import Pipeline
+		from sklearn.linear_model import LinearRegression
+		from sklearn.preprocessing import StandardScaler, PolynomialFeatures
+
+	Parameters:
+		df (DataFrame): The pandas DataFrame.
+		independent_names (array): An array of independent variable's name.
+		dependent_name (str): A dependent variable's name.
+		degree (int): An order of polynomial regression.
+	
+	Returns:
+		pipe(Pipeline): The trainned Multiple Polynomial Regression model.
+
+
+	'''
+	# We can normalize the data,  perform a transform and 
+	# fit the model simultaneously. 
+	Input=[('scale',StandardScaler()), 
+				 ('polynomial', PolynomialFeatures(degree=degree, include_bias=False)), 
+				 ('model',LinearRegression())]
+	pipe = Pipeline(Input)
+	Z = df[independent_names]
+	Y = df[dependent_name]
+	pipe.fit(Z,Y)
+
+	return pipe
