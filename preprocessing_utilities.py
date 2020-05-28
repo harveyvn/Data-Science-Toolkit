@@ -41,3 +41,14 @@ def count_rows_category(df, cate_column_name):
   df_val_count = df[cate_column_name].value_counts().to_frame().reset_index()
   df_val_count.columns = [cate_column_name, 'count']
   return df_val_count
+
+def convert_column_headers_2str(df):
+  '''
+  Convert the type of column headers to string
+
+  Parameters:
+    df (DataFrame): The pandas DataFrame.
+  '''
+
+  df.columns = list(map(str, df.columns))
+  [print (x + ': ', type(x)) for x in df.columns.values]
